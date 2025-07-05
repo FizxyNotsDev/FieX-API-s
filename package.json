@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple and customizable API documentation interface built with Express.js.",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "start": "node --no-deprecation index.js"
   },
