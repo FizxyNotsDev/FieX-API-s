@@ -736,6 +736,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     } else {
       handleApiRequest(`${window.location.origin}${apiData.path}`, apiData.name)
     }
+    const editParamsBtn = DOM.modal.element.querySelector(".edit-params-btn")
+    if (editParamsBtn) {
+      editParamsBtn.style.display = "none"
+    }
   }
 
   const validateModalInputs = () => {
@@ -797,13 +801,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     const apiUrlWithParams = `${window.location.origin}${currentApiData.path.split("?")[0]}?${newParams.toString()}`
     DOM.modal.endpoint.textContent = apiUrlWithParams
 
-    if (DOM.modal.queryInputContainer.firstChild) {
-      DOM.modal.queryInputContainer.firstChild.classList.add("fade-out")
-      setTimeout(() => {
-        if (DOM.modal.queryInputContainer.firstChild) DOM.modal.queryInputContainer.firstChild.style.display = "none"
-      }, 300)
-    }
-
     await handleApiRequest(apiUrlWithParams, currentApiData.name)
   }
 
@@ -853,15 +850,40 @@ document.addEventListener("DOMContentLoaded", async () => {
         DOM.modal.content.textContent = textData || "Response has no content or unknown format."
       }
 
-      DOM.modal.container.classList.remove("d-none")
-      DOM.modal.content.classList.remove("d-none")
-      DOM.modal.container.classList.add("slide-in-bottom")
       showToast(`Successfully retrieved data for ${apiName}`, "success")
 
-      // Reset submit button after successful response
-      if (DOM.modal.submitBtn) {
-        DOM.modal.submitBtn.disabled = false
-        DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+      // Add Edit Parameters button to modal footer if there were parameters
+      if (currentApiData && currentApiData.path.split("?")[1]) {
+        // Check if edit button already exists, if not create it
+        let editParamsBtn = DOM.modal.element.querySelector(".edit-params-btn")
+        if (!editParamsBtn) {
+          editParamsBtn = document.createElement("button")
+          editParamsBtn.className = "btn btn-outline-secondary me-2 edit-params-btn"
+          editParamsBtn.innerHTML = '<i class="fas fa-edit me-2"></i> Edit Parameters'
+          editParamsBtn.onclick = () => {
+            // Show the parameter form again
+            if (DOM.modal.queryInputContainer.firstChild) {
+              DOM.modal.queryInputContainer.firstChild.style.display = ""
+              DOM.modal.queryInputContainer.firstChild.classList.remove("fade-out")
+            }
+            DOM.modal.submitBtn.classList.remove("d-none")
+            DOM.modal.submitBtn.disabled = false
+            DOM.modal.submitBtn.innerHTML =
+              '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+            // Hide the response container
+            DOM.modal.container.classList.add("d-none")
+            // Hide the edit button
+            editParamsBtn.style.display = "none"
+            // Focus on first input
+            const firstInput = DOM.modal.queryInputContainer.querySelector("input")
+            if (firstInput) firstInput.focus()
+          }
+
+          // Insert the edit button before the submit button in the modal footer
+          const modalFooter = DOM.modal.element.querySelector(".modal-footer")
+          modalFooter.insertBefore(editParamsBtn, DOM.modal.submitBtn)
+        }
+        editParamsBtn.style.display = "inline-block"
       }
     } catch (error) {
       console.error("API Request Error:", error)
@@ -900,7 +922,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       // Always reset the submit button state when request completes
       if (DOM.modal.submitBtn) {
         DOM.modal.submitBtn.disabled = false
-        DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+        DOM.modal.submitBtn.innerHTML =
+          '<span>Send Again</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
 
         // Only hide the submit button if there are no parameters required
         const hasParams = currentApiData && currentApiData.path && currentApiData.path.includes("?")
