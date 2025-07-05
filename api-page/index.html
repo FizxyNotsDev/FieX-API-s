@@ -3,70 +3,206 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Modern API documentation and interactive testing interface. Explore our powerful APIs with ease.">
+    <meta name="keywords" content="API, API Documentation, REST API, Raol API, Raol, Developer Tools">
+    <meta name="author" content="Raol">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://api.vgxteam.xyz/">
+    <meta property="og:title" content="Raol Api'S - Modern API Documentation">
+    <meta property="og:description" content="Explore our various API endpoints with a modern and easy-to-use interface.">
+    <meta property="og:image" content="/src/banner.jpg">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://api.vgxteam.xyz/">
+    <meta property="twitter:title" content="Raol Api'S - Modern API Documentation">
+    <meta property="twitter:description" content="Explore our various API endpoints with a modern and easy-to-use interface.">
+    <meta property="twitter:image" content="/src/banner.jpg">
     <link rel="icon" href="/src/icon.png" type="image/png">
-    <title id="page"></title>
+    <title id="page">Raol Api'S</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link rel="stylesheet" href="/assets/styles.css">
 </head>
 <body>
-    <div id="loadingScreen">
+    <div id="loadingScreen" role="status" aria-live="polite">
         <div class="spinner-wrapper">
-            <div class="spinner-border text-dark mb-2" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <p>Waitt...</p>
+            <svg class="spinner-logo" width="80" height="80" viewBox="0 0 100 100" aria-hidden="true">
+                <circle class="spinner-path" cx="50" cy="50" r="40" fill="none" stroke-width="8" />
+                <circle class="spinner-animation" cx="50" cy="50" r="40" fill="none" stroke-width="8" />
+            </svg>
+            <p>Loading<span class="loading-dots">...</span></p>
+          </div>  
+         <h5 class="copyright-text">© 2025 Raol Api'S Corp. All rights reserved.</h5>
+       </div>
+
+    <aside class="side-nav" id="sideNavigation" aria-label="Main Navigation">
+        <div class="side-nav-logo">            
+            <span id="sideNavName">API</span>
+            <div id="versionHeader" class="badge-pill"></div>
         </div>
-    </div>
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-            <a class="navbar-brand" style="display: flex; align-items: center;">
-                <span id="header" class="me-2"></span>
-                <div id="versionHeader" style="background-color: #333; color: white; padding: 4px 12px; font-size: 12px; border-radius: 100px;"></div>
+        
+        <nav class="side-nav-links" aria-label="Navigation Links">
+            <a href="#home" class="side-nav-link active" aria-current="page">
+                <i class="fas fa-home" aria-hidden="true"></i>
+                <span>Home</span>
             </a>
-        </div>
-    </nav>
-    <div class="container">
-        <img id="dynamicImage" class="banner mb-4" style="border-radius: 8px;" src="">
-        <div id="nameContainer" style="display: flex; align-items: center;">
-            <h1 id="name" style="font-size: 32px; margin-right: 10px;"></h1>
-            <div id="version" style="background-color: #333; color: white; padding: 5px 12px; font-size: 12px; border-radius: 100px;"></div>
-        </div>
-        <p id="description" class="lead mb-3"></p>
-        <div id="apiLinks" class="mb-5"></div>
-        <input type="text" id="searchInput" class="form-control mb-5" placeholder="Search API...">
-        <div class="tab-content" id="apiContent"></div>
+            <a href="#apis" class="side-nav-link">
+                <i class="fas fa-plug" aria-hidden="true"></i>
+                <span>APIs</span>
+            </a>
+        </nav>
+        
+    </aside>
+
+    <div class="main-wrapper">
+        <header class="main-header" role="banner">
+            <button class="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="sideNavigation">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            
+            <div class="search-container" role="search">
+                <div class="input-group">
+                    <span class="input-group-text" aria-hidden="true"><i class="fas fa-search"></i></span>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search API..." aria-label="Search API">
+                    <button class="clear-search" id="clearSearch" aria-label="Clear search">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <button class="notification-bell" id="notificationBell" aria-label="Notifications">
+                    <i class="far fa-bell" aria-hidden="true"></i>
+                    <span class="notification-badge" id="notificationBadge" aria-hidden="true"></span>
+                </button>
+            </div>
+        </header>
+        
+        <main id="mainContent">
+            <section id="home" class="hero-section" aria-labelledby="heroHeading">
+                <div class="hero-content">
+                    <div class="hero-heading">
+                        <h1 id="name" class="gradient-text">Raol Api'S</h1>
+                        <div id="version" class="badge-pill">v1.0</div>
+                    </div>
+                    
+                    <p id="description" class="hero-description">A simple and easily customizable API documentation interface.</p>
+                </div>
+                
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="banner-container">
+                        <img id="dynamicImage" class="banner" src="/src/banner.jpg" alt="Banner API">
+                    </div>
+                    <div class="shape shape-1"></div>
+                    <div class="shape shape-2"></div>
+                    <div class="shape shape-3"></div>
+                </div>
+            </section>
+            
+            <section id="apis" class="api-section" aria-labelledby="apiSectionTitle">
+                <h2 id="apiSectionTitle" class="section-title">Available APIs</h2>
+                <p class="section-description">Explore our collection of powerful and easy-to-use APIs.</p>
+                
+                <div class="tab-content" id="apiContent">
+                    </div>
+            </section>
+        </main>
+        
+        <footer class="main-footer" role="contentinfo">
+            <div class="footer-content">
+                <div id="wm" class="copyright">&copy; 2025 Raol Api'S Corp. All rights reversed.</div>
+                <div class="footer-middle">
+                    <div class="theme-switcher">
+                        <span>Light</span>
+                        <label class="switch" aria-label="Toggle dark/light theme">
+                            <input type="checkbox" id="themeToggle">
+                            <span class="slider round" aria-hidden="true"></span>
+                        </label>
+                        <span>Dark</span>
+                    </div>
+                </div>
+                
+                <nav class="footer-links" aria-label="Additional links">
+                    <a href="https://whatsapp.com/channel/0029VbAi8n811ulGIozTyF3x" target="_blank" rel="noopener noreferrer" class="footer-link">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i> Info
+                    </a>
+                    <a href="https://whatsapp.com/channel/0029VbAi8n811ulGIozTyF3x" target="_blank" rel="noopener noreferrer" class="footer-link">
+                        <i class="fas fa-envelope" aria-hidden="true"></i> Contact
+                    </a>
+                </nav>
+            </div>
+        </footer>
     </div>
+
     <div class="modal fade" id="apiResponseModal" tabindex="-1" aria-labelledby="apiResponseModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" id="modalDialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg" id="modalDialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
+                <header class="modal-header">
                     <div>
-                        <h5 class="modal-title" id="apiResponseModalLabel"></h5>
-                        <p class="modal-desc text-muted mb-0" id="apiResponseModalDesc" style="font-size: 14px;"></p>
+                        <h3 class="modal-title" id="apiResponseModalLabel">API Name</h3>
+                        <p class="modal-desc mb-0" id="apiResponseModalDesc">API Description.</p>
                     </div>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fas fa-times" aria-hidden="true"></i>
+                    </button>
+                </header>
                 <div class="modal-body">
-                    <pre id="apiEndpoint" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;"></pre>
-                    <div id="apiQueryInputContainer"></div>
-                    <div id="apiResponseLoading" class="d-none d-flex justify-content-center align-items-center" style="height: 100px;">
-                        <div class="spinner-border custom-spinner" role="status">
-                            <span class="visually-hidden">Loading...</span>
+                    <section class="endpoint-container" aria-labelledby="endpointLabel">
+                        <div class="endpoint-label">
+                            <span id="endpointLabel">Endpoint</span>
+                            <button class="copy-btn" id="copyEndpoint" title="Copy to clipboard" aria-label="Copy endpoint">
+                                <i class="far fa-copy" aria-hidden="true"></i>
+                            </button>
                         </div>
+                        <pre id="apiEndpoint" class="code-block" tabindex="0"></pre>
+                    </section>
+                    
+                    <div id="apiQueryInputContainer" class="query-input-container">
+                        </div>
+                    
+                    <div id="apiResponseLoading" class="d-none" role="status" aria-live="polite">
+                        <svg class="spinner-logo" width="50" height="50" viewBox="0 0 100 100" aria-hidden="true">
+                            <circle class="spinner-path" cx="50" cy="50" r="40" fill="none" stroke-width="8" />
+                            <circle class="spinner-animation" cx="50" cy="50" r="40" fill="none" stroke-width="8" />
+                        </svg>
+                        <p>Processing request...</p>
                     </div>
-                    <pre id="apiResponseContent" class="d-none mt-2" style="background-color: #f8f9fa; padding: 10px; border-radius: 5px;"></pre>
+                    
+                    <section class="response-container d-none" id="responseContainer" aria-labelledby="responseLabel">
+                        <div class="response-label">
+                            <span id="responseLabel">Response</span>
+                            <button class="copy-btn" id="copyResponse" title="Copy to clipboard" aria-label="Copy response">
+                                <i class="far fa-copy" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <pre id="apiResponseContent" class="code-block d-none" tabindex="0"></pre>
+                    </section>
                 </div>
-                <div class="modal-footer">
-                    <button id="submitQueryBtn" class="btn btn-dark">Submit</button>
-                </div>
+                <footer class="modal-footer">
+                    <button id="submitQueryBtn" class="btn btn-primary" disabled>
+                        <span>Submit</span>
+                        <i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>
+                    </button>
+                </footer>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <header class="toast-header">
+                <i class="toast-icon fas fa-info-circle me-2" aria-hidden="true"></i>
+                <strong class="me-auto toast-title">Notification</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </header>
+            <div class="toast-body">
+                This is a notification message.
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/script.js"></script>
+    <script src="/assets/script.js"></script>
 </body>
 </html>
