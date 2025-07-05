@@ -25,6 +25,16 @@
           "status": "ready",
           "params": {
             "text": "Text for luminai to respond to"
+         }
+        },
+        {
+          "name": "Image Prompter",
+          "desc": "Generate prompt or description from an image",
+          "path": "/ai/image-prompt",
+          "status": "ready",
+          "params": {
+            "image": "Base64-encoded image string",
+            "instructions": "(optional) prompt instructions"
           }
         }
       ]
