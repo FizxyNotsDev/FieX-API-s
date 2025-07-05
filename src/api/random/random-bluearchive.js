@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 module.exports = function(app) {
     async function bluearchive() {
         try {
