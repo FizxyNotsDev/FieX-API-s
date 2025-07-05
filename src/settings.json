@@ -37,6 +37,17 @@
           "desc": "Get random Blue Archive character images",
           "path": "/random/ba",
           "status": "ready"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search Tools",
+      "items": [
+        {
+          "name": "YouTube",
+          "desc": "Video search",
+          "path": "/search/youtube?q="
         }
       ]
     }
