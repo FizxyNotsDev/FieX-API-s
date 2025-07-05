@@ -1,8 +1,8 @@
-# Rynn UI
+# FieX UI
 
-![Layout](https://files.catbox.moe/9qpys9.png)
+![Layout](https://files.catbox.moe/2oh040.jpg)
 
-Rynn UI is a simple and easy-to-use API documentation interface built with Express.js. It allows developers to quickly set up and view API documentation with customizable settings using a `settings.json` file. 
+FieX UI is a simple and easy-to-use API documentation interface built with Express.js. It allows developers to quickly set up and view API documentation with customizable settings using a `settings.json` file. 
 
 [![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/rynxzyy/Rynn-UI)
 
@@ -16,7 +16,7 @@ Rynn UI is a simple and easy-to-use API documentation interface built with Expre
 
 ## Live Demo
 
-Check out a live demo of Rynn UI [here](https://rynnn-ui.vercel.app)
+Check out a live demo of FieX UI [here](https://rynnn-ui.vercel.app)
 
 ## Setup
 
