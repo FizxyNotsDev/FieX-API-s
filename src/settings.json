@@ -28,6 +28,17 @@
           }
         }
       ]
+    },
+    {
+      "name": "Random Images",
+      "items": [
+        {
+          "name": "Blue Archive",
+          "desc": "Get random Blue Archive character images",
+          "path": "/random/ba",
+          "status": "ready"
+        }
+      ]
     }
   ]
 }
