@@ -1,5 +1,5 @@
-const axios = require('axios');
-const FormData = require('form-data');
+import axios from 'axios';
+import FormData from 'form-data';
 module.exports = function(app) {
     async function hydromind(content, model) {
         const form = new FormData();
