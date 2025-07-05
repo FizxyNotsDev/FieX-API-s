@@ -1,65 +1,31 @@
 {
-  "name": "Rynn Api's",
-  "version": "Rynn UI",
-  "description": "Simple and Easy-to-Use API Documentation",
+  "name": "FieX Api'S",
+  "version": "v1.0.0",
+  "description": "Simple and easy to use API.",
+  "maintenance": {
+    "enabled": false,
+    "gifUrl": "https://raw.githubusercontent.com/raolbyte/xyz/refs/heads/main/public/maintenance.gif"
+  },
+  "bannerImage": "/src/banner.jpg",
   "header": {
-    "status": "Online!",
-    "imageSrc": [
-      "https://media4.giphy.com/media/l0Iy33dWjmywkCnNS/giphy.gif?cid=6c09b952p3mt40j1mgznfi9rwwtccbjl7mtc2kvfugymeinr&ep=v1_internal_gif_by_id&rid=giphy.gif&ct=g"
-    ],
-    "imageSize": {
-      "mobile": "80%",
-      "tablet": "40%",
-      "desktop": "40%"
-    }
+    "status": "Active!"
   },
   "apiSettings": {
-    "creator": "Rynn"
+    "creator": "FieX Team",
+    "apikey": ["fiex-team"]
   },
-  "links": [
-    {
-      "name": "Source Code",
-      "url": "https://github.com/rynxzyy/Rynn-UI"
-    },
-    {
-      "name": "Contact Me",
-      "url": "https://wa.me/6285173370004"
-    }
-  ],
   "categories": [
     {
-      "name": "AI (Artificial Intelligence)",
+      "name": "Artificial Intelligence",
       "items": [
         {
           "name": "LuminAI",
-          "desc": "Talk with luminai",
-          "path": "/ai/luminai?text="
-        },
-        {
-          "name": "HydroMind",
-          "desc": "Talk with hydromind",
-          "path": "/ai/hydromind?text=&model=",
-          "innerDesc": "See the list of supported AI models here: https://mind.hydrooo.web.id"
-        }
-      ]
-    },
-    {
-      "name": "Random",
-      "items": [
-        {
-          "name": "Blue Archive",
-          "desc": "Blue Archive Random Images",
-          "path": "/random/ba"
-        }
-      ]
-    },
-    {
-      "name": "Search Tools",
-      "items": [
-        {
-          "name": "YouTube",
-          "desc": "Video search",
-          "path": "/search/youtube?q="
+          "desc": "Talk with luminai - Advanced AI assistant",
+          "path": "/ai/luminai?text=",
+          "status": "ready",
+          "params": {
+            "text": "Text for luminai to respond to"
+          }
         }
       ]
     }
