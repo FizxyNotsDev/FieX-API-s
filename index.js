@@ -1,8 +1,8 @@
-const express = require('express');
-const chalk = require('chalk');
-const fs = require('fs');
-const cors = require('cors');
-const path = require('path');
+import express from 'express';
+import chalk from 'chalk';
+import fs from 'fs';
+import cors from 'cors';
+import path from 'path';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
