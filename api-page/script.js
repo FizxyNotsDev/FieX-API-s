@@ -69,8 +69,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   // --- Share API Functions ---
   const generateShareLink = (apiData) => {
     const url = new URL(window.location.origin + window.location.pathname)
-    // Only use the API path for sharing - much simpler!
-    url.searchParams.set("share", apiData.path)
+    // Remove parameters from the path before sharing
+    const cleanPath = apiData.path.split("?")[0]
+    url.searchParams.set("share", cleanPath)
     return url.toString()
   }
 
@@ -84,7 +85,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     for (const category of settings.categories) {
       for (const item of category.items) {
-        if (item.path === path) {
+        // Compare both full path and clean path (without parameters)
+        const itemCleanPath = item.path.split("?")[0]
+        if (item.path === path || itemCleanPath === path) {
           return {
             path: item.path,
             name: item.name,
@@ -108,7 +111,9 @@ document.addEventListener("DOMContentLoaded", async () => {
       showToast("Share link copied to clipboard!", "success", "Share API")
 
       // Update URL to reflect the shared API
-      updateUrlParameter("share", currentApiData.path)
+      // Update URL to reflect the shared API (clean path without parameters)
+      const cleanPath = currentApiData.path.split("?")[0]
+      updateUrlParameter("share", cleanPath)
     } catch (err) {
       // Fallback for browsers that don't support clipboard API
       const textArea = document.createElement("textarea")
@@ -118,7 +123,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       try {
         document.execCommand("copy")
         showToast("Share link copied to clipboard!", "success", "Share API")
-        updateUrlParameter("share", currentApiData.path)
+        showToast("Share link copied to clipboard!", "success", "Share API")
+        // Update URL to reflect the shared API (clean path without parameters)
+        const cleanPath = currentApiData.path.split("?")[0]
+        updateUrlParameter("share", cleanPath)
       } catch (fallbackErr) {
         showToast("Failed to copy share link", "error")
       }
@@ -856,6 +864,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
       DOM.modal.queryInputContainer.appendChild(paramContainer)
       DOM.modal.submitBtn.classList.remove("d-none")
+      DOM.modal.submitBtn.disabled = true
+      DOM.modal.submitBtn.innerHTML = '<span>Send</span><i class="fas fa-paper-plane ms-2" aria-hidden="true"></i>'
+
       initializeTooltips(DOM.modal.queryInputContainer)
     } else {
       handleApiRequest(`${window.location.origin}${apiData.path}`, apiData.name)
