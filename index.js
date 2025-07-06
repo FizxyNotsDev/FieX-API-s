@@ -66,7 +66,7 @@ app.use((req, res, next) => {
   try {
     const settings = JSON.parse(fs.readFileSync(settingsPath, "utf-8"))
 
-    const skipPaths = ["/api/settings", "/assets/", "/src/"]
+    const skipPaths = ["/api/settings", "/assets/", "/src/", "/api/preview-image"]
     const shouldSkip = skipPaths.some((path) => req.path.startsWith(path))
 
     if (settings.maintenance && settings.maintenance.enabled && !shouldSkip) {
@@ -98,6 +98,33 @@ app.get("/assets/styles.css", (req, res) => {
 app.get("/assets/script.js", (req, res) => {
   res.setHeader("Content-Type", "application/javascript")
   res.sendFile(path.join(__dirname, "api-page", "script.js"))
+})
+
+app.get("/api/preview-image", (req, res) => {
+  try {
+    const previewImagePath = path.join(__dirname, "src", "preview.png")
+
+    if (fs.existsSync(previewImagePath)) {
+      res.setHeader("Content-Type", "image/png")
+      res.setHeader("Cache-Control", "public, max-age=86400")
+      res.sendFile(previewImagePath)
+    } else {
+      const bannerPath = path.join(__dirname, "src", "banner.jpg")
+      if (fs.existsSync(bannerPath)) {
+        res.setHeader("Content-Type", "image/jpeg")
+        res.setHeader("Cache-Control", "public, max-age=86400")
+        res.sendFile(bannerPath)
+      } else {
+        const iconPath = path.join(__dirname, "src", "icon.png")
+        res.setHeader("Content-Type", "image/png")
+        res.setHeader("Cache-Control", "public, max-age=86400")
+        res.sendFile(iconPath)
+      }
+    }
+  } catch (error) {
+    console.error("Error serving preview image:", error)
+    res.status(404).json({ error: "Preview image not found" })
+  }
 })
 
 app.get("/api/settings", (req, res) => {
