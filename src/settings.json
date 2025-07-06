@@ -25,7 +25,7 @@
           "status": "ready",
           "params": {
             "text": "Text for luminai to respond to"
-         }
+          }
         },
         {
           "name": "Image Prompter",
@@ -51,15 +51,16 @@
       ]
     },
     {
-  "name": "Downloader AIO",
-  "items": [
-    {
-      "name": "AIO Downloader",
-      "desc": "Download media from all platforms (FB, IG, TikTok, Spotify, dll)",
-      "path": "/download/aio?url=",
-      "status": "ready",
-      "params": {
-        "url": "The media URL to download"
+      "name": "Downloader AIO",
+      "items": [
+        {
+          "name": "AIO Downloader",
+          "desc": "Download media from all platforms (FB, IG, TikTok, Spotify, dll)",
+          "path": "/download/aio?url=",
+          "status": "ready",
+          "params": {
+            "url": "The media URL to download"
+          }
         }
       ]
     }
