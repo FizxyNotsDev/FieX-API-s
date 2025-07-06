@@ -26,6 +26,16 @@
           "params": {
             "text": "Text for luminai to respond to"
           }
+        },
+        {
+          "name": "DeepSeek-GiniGen",
+          "desc": "Tanya jawab dengan model DeepSeek (bisa pakai websearch)",
+          "path": "/ai/deepseek?text=&websearch=",
+          "status": "ready",
+          "params": {
+            "text": "Pertanyaan yang ingin diajukan",
+            "websearch": "(optional) true atau false (default: false)"
+          }
         }
       ]
     },
