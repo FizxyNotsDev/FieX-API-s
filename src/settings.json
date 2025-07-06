@@ -60,6 +60,19 @@
           "status": "ready",
           "params": {
             "url": "The media URL to download"
+        }
+      ]
+    },
+    {            
+      "name": "YouTube",
+      "items": [
+        {
+          "name": "YouTube Search",
+          "desc": "Search YouTube videos by query",
+          "path": "/search/youtube?q=",
+          "status": "ready",
+          "params": {
+            "q": "Search query string"            
           }
         }
       ]
