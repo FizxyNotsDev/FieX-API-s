@@ -51,12 +51,15 @@
       ]
     },
     {
-      "name": "Search Tools",
-      "items": [
-        {
-          "name": "YouTube",
-          "desc": "Video search",
-          "path": "/search/youtube?q="
+  "name": "Downloader AIO",
+  "items": [
+    {
+      "name": "AIO Downloader",
+      "desc": "Download media from all platforms (FB, IG, TikTok, Spotify, dll)",
+      "path": "/download/aio?url=",
+      "status": "ready",
+      "params": {
+        "url": "The media URL to download"
         }
       ]
     }
