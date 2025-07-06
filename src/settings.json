@@ -60,8 +60,7 @@
           "status": "ready",
           "params": {
             "url": "The media URL to download"
-        }
-      ]
+          }
     },
     {            
       "name": "YouTube",
