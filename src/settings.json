@@ -26,16 +26,6 @@
           "params": {
             "text": "Text for luminai to respond to"
           }
-        },
-        {
-          "name": "Image Prompter",
-          "desc": "Generate prompt or description from an image",
-          "path": "/ai/image-prompt",
-          "status": "ready",
-          "params": {
-            "image": "Base64-encoded image string",
-            "instructions": "(optional) prompt instructions"
-          }
         }
       ]
     },
@@ -61,9 +51,11 @@
           "params": {
             "url": "The media URL to download"
           }
+        }
+      ]
     },
-    {            
-      "name": "YouTube",
+    {
+      "name": "Search",
       "items": [
         {
           "name": "YouTube Search",
@@ -71,7 +63,7 @@
           "path": "/search/youtube?q=",
           "status": "ready",
           "params": {
-            "q": "Search query string"            
+            "q": "Search query string"
           }
         }
       ]
