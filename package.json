@@ -19,7 +19,8 @@
     "yt-search": "latest",
     "eventsource": "latest",
     "tough-cookie": "latest",
-    "axios-cookiejar-support": "latest"
+    "axios-cookiejar-support": "latest",
+    "node-fetch": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
