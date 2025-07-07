@@ -1,14 +1,11 @@
-import express from "express";
-import fetch from "node-fetch";
+/*
+• Scrape YouTube Transcript API
+• Author: SaaOfc's + FieX
+*/
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+import fetch from 'node-fetch';
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-// Fungsi utama untuk scrape transcript YouTube
-async function Transcript(videoUrl) {
+async function getTranscript(videoUrl) {
   try {
     const response = await fetch('https://kome.ai/api/transcript', {
       method: 'POST',
@@ -32,46 +29,37 @@ async function Transcript(videoUrl) {
     const data = await response.json();
 
     if (!data.transcript) {
-      throw new Error("Tidak ada respon transcript.");
+      throw new Error('Tidak ada transkrip tersedia.');
     }
 
     return data.transcript;
   } catch (err) {
-    throw new Error(`Error: ${err.message}`);
+    throw new Error(`Gagal mengambil data: ${err.message}`);
   }
 }
 
-// Endpoint API: /tools/transcript?url=https://youtu.be/xxxxx
-app.get("/tools/transcript", async (req, res) => {
-  const { url } = req.query;
+export default function (app) {
+  app.get('/tools/transcript', async (req, res) => {
+    const { url } = req.query;
 
-  if (!url) {
-    return res.status(400).json({
-      status: false,
-      message: "Parameter ?url= wajib diisi."
-    });
-  }
+    if (!url) {
+      return res.status(400).json({
+        status: false,
+        message: 'Parameter ?url= diperlukan.'
+      });
+    }
 
-  try {
-    const transcript = await Transcript(url);
-    res.json({
-      status: true,
-      creator: "FieX Team",
-      transcript
-    });
-  } catch (err) {
-    res.status(500).json({
-      status: false,
-      message: err.message
-    });
-  }
-});
-
-// Tes langsung jika buka root
-app.get("/", (req, res) => {
-  res.send("🎤 YouTube Transcript API is running. Gunakan endpoint /tools/transcript?url=");
-});
-
-app.listen(PORT, () => {
-  console.log(`✅ Server aktif di http://localhost:${PORT}`);
-});
+    try {
+      const transcript = await getTranscript(url);
+      res.json({
+        status: true,
+        transcript
+      });
+    } catch (err) {
+      res.status(500).json({
+        status: false,
+        message: err.message
+      });
+    }
+  });
+}
