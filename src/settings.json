@@ -7,6 +7,7 @@
     "gifUrl": "https://raw.githubusercontent.com/raolbyte/xyz/refs/heads/main/public/maintenance.gif"
   },
   "bannerImage": "/src/banner.jpg",
+  "previewImage": "/src/preview.png",
   "header": {
     "status": "Active!"
   },
