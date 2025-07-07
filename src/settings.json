@@ -79,25 +79,36 @@
         }
       ]
     },
+{
+  "name": "Tools",
+  "items": [
     {
-      "name": "Tools",
-      "items": [
-        {
-          "name": "TikTok Monetization",
-          "desc": "Cek estimasi penghasilan akun TikTok berdasarkan follower dan engagement",
-          "path": "/tiktok/monet?username=",
-          "status": "ready",
-          "params": {
-            "username": "Username TikTok tanpa tanda @"
-          }
-        },
-        {
-          "name": "YouTube Transcript",
-          "desc": "Ambil transkrip dari video YouTube (jika tersedia)",
-          "path": "/tools/transcript?url=",
-          "status": "ready",
-          "params": {
-            "url": "URL video YouTube"
+      "name": "TikTok Monetization",
+      "desc": "Cek estimasi penghasilan akun TikTok berdasarkan follower dan engagement",
+      "path": "/tiktok/monet?username=",
+      "status": "ready",
+      "params": {
+        "username": "Username TikTok tanpa tanda @"
+      }
+    },
+    {
+      "name": "YouTube Transcript",
+      "desc": "Ambil transkrip dari video YouTube (jika tersedia)",
+      "path": "/tools/transcript?url=",
+      "status": "ready",
+      "params": {
+        "url": "URL video YouTube"
+      }
+    },
+    {
+      "name": "Image Enhancer (iHancer)",
+      "desc": "Tingkatkan kualitas gambar dari URL menggunakan iHancer",
+      "path": "/tools/ihancer?url=&size=&method=",
+      "status": "ready",
+      "params": {
+        "url": "URL gambar yang akan ditingkatkan",
+        "size": "(optional) low | medium | high (default: medium)",
+        "method": "(optional) 1 - 4 (default: 1)"
           }
         }
       ]
