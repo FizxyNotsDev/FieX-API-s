@@ -77,6 +77,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "Tools",
+      "items": [
+        {
+          "name": "TikTok Monetization",
+          "desc": "Cek estimasi penghasilan akun TikTok berdasarkan follower dan engagement",
+          "path": "/tiktok/monet?username=",
+          "status": "ready",
+          "params": {
+            "username": "Username TikTok tanpa tanda @"
+          }
+        }
+      ]
     }
   ]
 }
