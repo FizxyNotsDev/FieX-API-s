@@ -5,36 +5,17 @@
 
 import fetch from 'node-fetch';
 
-async function getTranscript(videoUrl) {
+function extractVideoId(url) {
   try {
-    const response = await fetch('https://kome.ai/api/transcript', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Origin': 'https://kome.ai',
-        'Referer': 'https://kome.ai/tools/youtube-transcript-generator',
-        'User-Agent': 'Mozilla/5.0',
-        'Accept': 'application/json, text/plain, */*'
-      },
-      body: JSON.stringify({
-        video_id: videoUrl,
-        format: true
-      })
-    });
+    const parsed = new URL(url);
+    const host = parsed.hostname;
 
-    if (!response.ok) {
-      throw new Error(`Gagal mengambil transkrip! Status: ${response.status}`);
-    }
+    if (host === 'youtu.be') return parsed.pathname.slice(1);
+    if (host.includes('youtube.com')) return parsed.searchParams.get('v');
 
-    const data = await response.json();
-
-    if (!data.transcript) {
-      throw new Error('Tidak ada transkrip tersedia.');
-    }
-
-    return data.transcript;
-  } catch (err) {
-    throw new Error(`Gagal mengambil data: ${err.message}`);
+    throw new Error('❌ URL YouTube tidak valid.');
+  } catch {
+    throw new Error('❌ Format URL salah.');
   }
 }
 
@@ -45,12 +26,48 @@ export default function (app) {
     if (!url) {
       return res.status(400).json({
         status: false,
-        message: 'Parameter ?url= diperlukan.'
+        message: 'Parameter ?url= dibutuhkan.'
       });
     }
 
     try {
-      const transcript = await getTranscript(url);
+      const videoId = extractVideoId(url);
+
+      const response = await fetch('https://kome.ai/api/transcript', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Origin': 'https://kome.ai',
+          'Referer': 'https://kome.ai/tools/youtube-transcript-generator',
+          'User-Agent': 'Mozilla/5.0',
+          'Accept': 'application/json, text/plain, */*'
+        },
+        body: JSON.stringify({
+          video_id: videoId,
+          format: true
+        })
+      });
+
+      if (!response.ok) {
+        return res.status(500).json({
+          status: false,
+          message: `Gagal mengambil transkrip (Status: ${response.status})`
+        });
+      }
+
+      const data = await response.json();
+
+      if (!data.transcript) {
+        return res.status(404).json({
+          status: false,
+          message: 'Transkrip tidak ditemukan untuk video ini.'
+        });
+      }
+
+      const transcript = data.transcript.length > 4000
+        ? data.transcript.slice(0, 4000) + '\n\n...(terpotong)'
+        : data.transcript;
+
       res.json({
         status: true,
         transcript
