@@ -96,6 +96,15 @@
           "params": {
             "q": "Search query string"
           }
+        },
+        {
+          "name": "Play (YouTube Audio)",
+          "desc": "Cari dan unduh audio dari YouTube berdasarkan judul",
+          "path": "/search/play?q=",
+          "status": "ready",
+          "params": {
+            "q": "Judul atau kata kunci video YouTube"
+          }
         }
       ]
     },
