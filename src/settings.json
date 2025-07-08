@@ -37,6 +37,17 @@
             "text": "Pertanyaan yang ingin diajukan",
             "websearch": "(optional) true atau false (default: false)"
           }
+        },
+        {
+          "name": "AIFreeBox Text-to-Image",
+          "desc": "Generate gambar AI berdasarkan teks dengan berbagai style (art, peta, thumbnail, kartun)",
+          "path": "/ai/aifreebox?prompt=&aspectRatio=&slug=",
+          "status": "ready",
+          "params": {
+            "prompt": "Deskripsi teks gambar yang ingin dibuat",
+            "aspectRatio": "(optional) 1:1 | 2:3 | 9:16 | 16:9 (default: 16:9)",
+            "slug": "(optional) ai-art-generator | ai-fantasy-map-creator | ai-youtube-thumbnail-generator | ai-old-cartoon-characters-generator"
+          }
         }
       ]
     },
@@ -79,36 +90,36 @@
         }
       ]
     },
-{
-  "name": "Tools",
-  "items": [
     {
-      "name": "TikTok Monetization",
-      "desc": "Cek estimasi penghasilan akun TikTok berdasarkan follower dan engagement",
-      "path": "/tiktok/monet?username=",
-      "status": "ready",
-      "params": {
-        "username": "Username TikTok tanpa tanda @"
-      }
-    },
-    {
-      "name": "YouTube Transcript",
-      "desc": "Ambil transkrip dari video YouTube (jika tersedia)",
-      "path": "/tools/transcript?url=",
-      "status": "ready",
-      "params": {
-        "url": "URL video YouTube"
-      }
-    },
-    {
-      "name": "Image Enhancer (iHancer)",
-      "desc": "Tingkatkan kualitas gambar dari URL menggunakan iHancer",
-      "path": "/tools/ihancer?url=&size=&method=",
-      "status": "ready",
-      "params": {
-        "url": "URL gambar yang akan ditingkatkan",
-        "size": "(optional) low | medium | high (default: medium)",
-        "method": "(optional) 1 - 4 (default: 1)"
+      "name": "Tools",
+      "items": [
+        {
+          "name": "TikTok Monetization",
+          "desc": "Cek estimasi penghasilan akun TikTok berdasarkan follower dan engagement",
+          "path": "/tiktok/monet?username=",
+          "status": "ready",
+          "params": {
+            "username": "Username TikTok tanpa tanda @"
+          }
+        },
+        {
+          "name": "YouTube Transcript",
+          "desc": "Ambil transkrip dari video YouTube (jika tersedia)",
+          "path": "/tools/transcript?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL video YouTube"
+          }
+        },
+        {
+          "name": "Image Enhancer (iHancer)",
+          "desc": "Tingkatkan kualitas gambar dari URL menggunakan iHancer",
+          "path": "/tools/ihancer?url=&size=&method=",
+          "status": "ready",
+          "params": {
+            "url": "URL gambar yang akan ditingkatkan",
+            "size": "(optional) low | medium | high (default: medium)",
+            "method": "(optional) 1 - 4 (default: 1)"
           }
         }
       ]
