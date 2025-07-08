@@ -50,15 +50,12 @@
           }
         },
         {
-          "name": "Gemmy AI (Vertex Gemini)",
-          "desc": "Gunakan Gemini Vertex AI untuk chat (opsional pakai image/file) atau generate gambar AI dari prompt",
-          "path": "/ai/gemmy/:mode?q=&model=&search=",
+          "name": "Gemmy Chat (Gemini 2.0)",
+          "desc": "Tanya jawab dengan model Gemini 2.0 Flash (dengan Google Search)",
+          "path": "/ai/gemmy/chat?q=",
           "status": "ready",
           "params": {
-            "mode": "Mode AI: chat atau image",
-            "q": "Teks pertanyaan (chat) atau prompt gambar (image)",
-            "model": "(optional) Model Gemini yang digunakan",
-            "search": "(optional untuk chat) true/false (aktifkan Google Search)"
+            "q": "Pertanyaan yang ingin diajukan ke Gemini"
           }
         }
       ]
