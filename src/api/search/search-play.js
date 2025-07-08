@@ -2,7 +2,7 @@ import axios from 'axios';
 import yts from 'yt-search';
 
 export default function (app) {
-  app.get('/download/play', async (req, res) => {
+  app.get('/search/play', async (req, res) => {
     const query = req.query.q;
 
     if (!query) {
