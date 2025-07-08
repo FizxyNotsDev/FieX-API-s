@@ -8,7 +8,7 @@ export default function (app) {
     if (!query) {
       return res.status(400).json({
         status: false,
-        message: '❌ Parameter ?q= harus diisi. Contoh: /download/play?q=Lagu Favorit'
+        message: '❌ Parameter ?q= harus diisi. Contoh: /search/play?q=Lagu Favorit'
       });
     }
 
