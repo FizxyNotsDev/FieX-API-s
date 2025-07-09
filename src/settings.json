@@ -139,6 +139,16 @@
             "size": "(optional) low | medium | high (default: medium)",
             "method": "(optional) 1 - 4 (default: 1)"
           }
+        },
+        {
+          "name": "NIK Checker",
+          "desc": "Cek informasi NIK secara lengkap (nama, alamat, usia, TPS, dll)",
+          "path": "/tools/nik-checker?nik=",
+          "status": "ready",
+          "params": {
+            "nik": "NIK 16 digit yang ingin dicek"
+            
+          }
         }
       ]
     },
