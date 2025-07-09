@@ -1,35 +1,39 @@
-app.get('/info/jadwaltv', async (req, res) => {
-  const { channel } = req.query;
+import axios from 'axios';
 
-  if (!channel) {
-    return res.status(400).json({
-      status: false,
-      message: "❌ Parameter ?channel= harus diisi."
-    });
-  }
+export default function (app) {
+  app.get('/info/jadwaltv', async (req, res) => {
+    const { channel = 'MNCTV' } = req.query;
 
-  try {
-    // Query API untuk mendapatkan jadwal berdasarkan channel
-    const { data } = await axios.get(`https://zenzxz.dpdns.org/info/jadwaltv?channel=${encodeURIComponent(channel)}`);
-    
-    if (data.status === true) {
-      return res.json({
+    try {
+      const { data } = await axios.get('https://zenzxz.dpdns.org/info/jadwaltv', {
+        params: { channel },
+        headers: {
+          'User-Agent': 'Mozilla/5.0',
+          'Accept': 'application/json'
+        }
+      });
+
+      if (!data?.status || !data.jadwal) {
+        return res.status(404).json({
+          status: false,
+          creator: 'FieX Team',
+          message: '❌ Jadwal tidak ditemukan atau channel tidak tersedia.'
+        });
+      }
+
+      res.json({
         status: true,
-        creator: data.creator,
+        creator: 'FieX Team',
         channel: data.channel,
         jadwal: data.jadwal
       });
-    } else {
-      return res.status(404).json({
+    } catch (err) {
+      res.status(500).json({
         status: false,
-        creator: "FieX Team",
-        message: "❌ Jadwal tidak ditemukan atau format tidak sesuai."
+        creator: 'FieX Team',
+        message: '❌ Gagal mengambil data jadwal TV.',
+        error: err.message
       });
     }
-  } catch (err) {
-    res.status(500).json({
-      status: false,
-      message: "❌ Terjadi kesalahan saat mengambil jadwal."
-    });
-  }
-});
+  });
+}
