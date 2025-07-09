@@ -141,6 +141,20 @@
           }
         }
       ]
+    },
+    {
+      "name": "Info",
+      "items": [
+        {
+          "name": "TV Schedule",
+          "desc": "Lihat jadwal tayangan TV berdasarkan nama channel",
+          "path": "/info/jadwaltv?channel=",
+          "status": "ready",
+          "params": {
+            "channel": "Nama stasiun TV. Contoh: MNCTV, RCTI, SCTV, INDOSIAR, dll"
+          }
+        }
+      ]
     }
   ]
 }
