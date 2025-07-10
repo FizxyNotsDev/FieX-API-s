@@ -172,7 +172,7 @@
           "name": "Brat Generator",
           "desc": "Buat gambar atau video sticker dari teks gaya brat aesthetic. Gunakan `type=image|video`.",
           "path": "/sticker/brat?text=&type=&color=&bg=&blur=&speed=",
-          "status": "ready",
+          "status": "off",
           "params": {
             "text": "Teks yang akan dirender",
             "type": "image atau video (wajib)",
