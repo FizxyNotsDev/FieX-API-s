@@ -146,8 +146,7 @@
           "path": "/tools/nik-checker?nik=",
           "status": "ready",
           "params": {
-            "nik": "NIK 16 digit yang ingin dicek"
-            
+            "nik": "NIK 16 digit yang ingin dicek"  
           }
         }
       ]
@@ -162,6 +161,25 @@
           "status": "ready",
           "params": {
             "channel": "Nama stasiun TV. Contoh: MNCTV, RCTI, SCTV, INDOSIAR, dll"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sticker",
+      "items": [
+        {
+          "name": "Brat Generator",
+          "desc": "Buat gambar atau video sticker dari teks gaya brat aesthetic. Gunakan `type=image|video`.",
+          "path": "/sticker/brat?text=&type=&color=&bg=&blur=&speed=",
+          "status": "ready",
+          "params": {
+            "text": "Teks yang akan dirender",
+            "type": "image atau video (wajib)",
+            "color": "(optional) warna teks (contoh: black atau ['red','blue'])",
+            "bg": "(optional) warna latar belakang",
+            "blur": "(optional) tingkat blur (0-10, default: 1)",
+            "speed": "(optional, jika type=video) fast | normal | slow (default: normal)"
           }
         }
       ]
