@@ -174,6 +174,15 @@
           "params": {
             "channel": "Nama stasiun TV. Contoh: MNCTV, RCTI, SCTV, INDOSIAR, dll"
           }
+        },
+        {
+          "name": "Info Gempa Terkini",
+          "desc": "Mendapatkan informasi gempa terbaru (magnitudo, kedalaman, wilayah, potensi, dll).",
+          "path": "/info/gempa",
+          "category": "info",
+          "status": "ready",
+          "params": {}    
+          }
         }
       ]
     },
