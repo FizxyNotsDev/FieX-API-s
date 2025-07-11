@@ -178,20 +178,16 @@
       ]
     },
     {
-      "name": "Cooming Soon",
+      "name": "Maker",
       "items": [
         {
-          "name": "Brat Generator",
-          "desc": "Buat gambar atau video sticker dari teks gaya brat aesthetic. Gunakan `type=image|video`.",
-          "path": "/sticker/brat?text=&type=&color=&bg=&blur=&speed=",
-          "status": "off",
+          "name": "Brat Sticker (Image)",
+          "desc": "Generate brat-style sticker image dari teks",
+          "path": "/maker/brat-image?text=",
+          "status": "ready",
+          "category": "maker",
           "params": {
-            "text": "Teks yang akan dirender",
-            "type": "image atau video (wajib)",
-            "color": "(optional) warna teks (contoh: black atau ['red','blue'])",
-            "bg": "(optional) warna latar belakang",
-            "blur": "(optional) tingkat blur (0-10, default: 1)",
-            "speed": "(optional, jika type=video) fast | normal | slow (default: normal)"
+            "text": "Teks yang akan dijadikan brat sticker (image)"
           }
         }
       ]
