@@ -57,6 +57,18 @@
           "params": {
             "q": "Pertanyaan yang ingin diajukan ke Gemini"
           }
+        },
+        {
+         "name": "Realistic AI Image",
+         "desc": "Generate AI image dengan gaya realistis",
+         "path": "/ai/realistic?prompt=...",
+         "status": "ready",
+         "params": {
+           "prompt": "Deskripsi teks untuk diubah menjadi gambar",
+           "style": "Gaya gambar, contoh: photorealistic, cinematic, portrait, hyperreal",
+           "resolution": "Ukuran gambar, contoh: 512x512, 1920x1080",
+           "seed": "(optional) Angka acak jika ingin konsisten hasil"    
+          }
         }
       ]
     },
