@@ -1,9 +1,8 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-  app.get('/maker/brat-image', async (req, res) => {
+  app.get('/maker/brat', async (req, res) => {
     const { text } = req.query;
-
     if (!text) {
       return res.status(400).json({
         status: false,
@@ -12,7 +11,8 @@ module.exports = function (app) {
     }
 
     try {
-      const response = await axios.get(`https://zenzxz.dpdns.org/maker/brat?text=${encodeURIComponent(text)}`, {
+      const url = `https://zenzxz.dpdns.org/maker/brat?text=${encodeURIComponent(text)}`;
+      const response = await axios.get(url, {
         responseType: 'arraybuffer',
         headers: {
           'User-Agent': 'Mozilla/5.0'
@@ -24,7 +24,7 @@ module.exports = function (app) {
     } catch (err) {
       res.status(500).json({
         status: false,
-        message: 'Gagal mengambil brat sticker',
+        message: 'Gagal ambil brat sticker',
         error: err.message
       });
     }
