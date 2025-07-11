@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 module.exports = function (app) {
-  app.get('/sticker/brat-image', async (req, res) => {
+  app.get('/maker/brat-image', async (req, res) => {
     const { text } = req.query;
 
     if (!text) {
