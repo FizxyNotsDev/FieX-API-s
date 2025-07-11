@@ -183,7 +183,7 @@
         {
           "name": "Brat Sticker (Image)",
           "desc": "Generate brat-style sticker image dari teks",
-          "path": "/maker/brat-image?text=",
+          "path": "/maker/brat?text=",
           "status": "ready",
           "category": "maker",
           "params": {
