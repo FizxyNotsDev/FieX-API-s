@@ -22,7 +22,7 @@ export default function (app) {
       // Sukses
       res.json({
         status: true,
-        source: 'Zenzxz API',
+        source: 'FieX API`s',
         data: response.data.data
       })
 
