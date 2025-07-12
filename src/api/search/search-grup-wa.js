@@ -1,67 +1,60 @@
+// src/api/search/whatsapp.js
+import express from 'express';
 import axios from 'axios';
 import cheerio from 'cheerio';
 
-export default function (app) {
+export default function(app) {
   app.get('/search/whatsapp', async (req, res) => {
-    const keyword = req.query.q || 'termux';
-    const headers = {
-      "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-      "Referer": "https://groupda1.link/add/group/search",
-      "User-Agent": "Mozilla/5.0"
-    };
-
-    const results = [];
+    const q = req.query.q;
+    if (!q) return res.status(400).json({ status: false, message: 'Query q= diperlukan.' });
 
     try {
-      for (let page = 0; page < 5; page++) {
-        const form = new URLSearchParams({
-          group_no: page.toString(),
-          search: 'true',
-          keyword
-        });
+      const keywords = q.split(',').map(k => k.trim());
+      const results = [];
 
-        const response = await axios.post(
-          'https://groupda1.link/add/group/loadresult',
-          form,
-          { headers }
-        );
+      for (const keyword of keywords) {
+        let page = 0;
+        while (true) {
+          const resp = await axios.post(
+            'https://groupda1.link/add/group/loadresult',
+            new URLSearchParams({ group_no: page.toString(), search: 'true', keyword }),
+            {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Referer': 'https://groupda1.link/add/group/search',
+                'Origin': 'https://groupda1.link',
+                'User-Agent': 'Mozilla/5.0',
+              },
+              timeout: 10000,
+            }
+          );
+          const html = resp.data;
+          const $ = cheerio.load(html);
+          const items = $('.maindiv');
+          if (!items.length) break;
 
-        const $ = cheerio.load(response.data);
-        const maindivs = $('.maindiv');
+          items.each((i, el) => {
+            const tag = $(el).find('a[href]');
+            const href = tag.attr('href');
+            const title = tag.attr('title')?.replace('Whatsapp group invite link: ', '');
+            const desc = $(el).find('p.descri').text().trim() || null;
+            if (href && title) {
+              const code = href.split('/').pop();
+              const link = `https://chat.whatsapp.com/${code}`;
+              if (!results.find(r => r.code === code)) {
+                results.push({ name: title, code, link, description: desc, keyword });
+              }
+            }
+          });
 
-        if (!maindivs.length) break;
-
-        maindivs.each((_, el) => {
-          const tag = $(el).find('a[href]');
-          const link = tag.attr('href');
-          const title = tag.attr('title')?.replace('Whatsapp group invite link: ', '');
-          const desc = $(el).find('p.descri').text().trim();
-          const code = link.split('/').pop();
-
-          if (!results.find(r => r.code === code)) {
-            results.push({
-              name: title,
-              link,
-              code,
-              description: desc || 'Tidak ada deskripsi',
-              keyword
-            });
-          }
-        });
+          page++;
+          await new Promise(r => setTimeout(r, 500));
+        }
       }
 
-      res.json({
-        status: true,
-        total: results.length,
-        results
-      });
-
-    } catch (err) {
-      res.status(500).json({
-        status: false,
-        message: 'Terjadi kesalahan saat mengambil data.',
-        error: err.message
-      });
+      res.json({ status: true, creator: 'FieX Team', result: results });
+    } catch (e) {
+      res.status(500).json({ status: false, message: e.message });
     }
   });
 }
