@@ -1,82 +1,86 @@
-// /api/search/whatsapp.js
 import axios from 'axios';
 import cheerio from 'cheerio';
 
 export default function (app) {
   app.get('/search/whatsapp', async (req, res) => {
-    const q = req.query.q;
-    if (!q) {
-      return res.status(400).json({
-        status: false,
-        message: 'Parameter "q" (keyword) wajib diisi. Contoh: /search/whatsapp?q=belajar,programming'
-      });
-    }
+    const keyword = req.query.q;
+    if (!keyword) return res.status(400).json({ status: false, message: 'Query ?q= wajib diisi' });
 
     const headers = {
       "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
       "Referer": "https://groupda1.link/add/group/search",
       "Accept-Language": "en-US,en;q=0.9",
       "Accept": "text/html, */*; q=0.01",
+      "Host": "groupda1.link",
       "Origin": "https://groupda1.link",
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/91.0.4472.124 Safari/537.36"
+      "User-Agent": "Mozilla/5.0"
     };
 
+    const keywords = keyword.split(',');
     const results = [];
-    const keywordList = q.split(',');
 
-    for (const name of keywordList) {
-      const keyword = name.trim();
-      for (let page = 0; page < 10; page++) {
-        const data = new URLSearchParams({
-          group_no: `${page}`,
-          search: 'true',
-          keyword
-        });
+    try {
+      for (const k of keywords) {
+        const trimmed = k.trim();
+        let page = 0;
 
-        try {
+        while (page < 10) {
+          const form = new URLSearchParams({
+            group_no: page.toString(),
+            search: 'true',
+            keyword: trimmed
+          });
+
           const response = await axios.post(
             'https://groupda1.link/add/group/loadresult',
-            data,
+            form,
             { headers }
           );
+
+          if (!response.data || response.data.length === 0) break;
 
           const $ = cheerio.load(response.data);
           let found = false;
 
           $('.maindiv').each((_, el) => {
             const tag = $(el).find('a[href]');
-            if (!tag.length) return;
+            const link = tag.attr('href');
+            const title = tag.attr('title')?.replace('Whatsapp group invite link: ', '');
+            const desc = $(el).find('p.descri').text().trim() || 'Tidak ada deskripsi';
+            const code = link?.split('/').pop();
+            if (!code) return;
 
-            const href = tag.attr('href');
-            const title = tag.attr('title')?.replace('Whatsapp group invite link: ', '') ?? 'Tanpa Nama';
-            const description = $(el).find('p.descri').text().trim() || 'Tidak ada deskripsi';
-            const code = href?.split('/').pop();
-            const link = `https://chat.whatsapp.com/${code}`;
-
+            const group_link = `https://chat.whatsapp.com/${code}`;
             if (!results.some(r => r.Code === code)) {
               results.push({
                 Name: title,
-                Link: link,
+                Link: group_link,
                 Code: code,
-                Description: description,
-                Keyword: keyword
+                Description: desc,
+                Keyword: trimmed
               });
               found = true;
             }
           });
 
           if (!found) break;
-        } catch (err) {
-          break;
+          page++;
         }
       }
-    }
 
-    res.json({
-      status: true,
-      keyword: keywordList,
-      found: results.length,
-      results
-    });
+      return res.json({
+        status: true,
+        keyword,
+        total: results.length,
+        groups: results
+      });
+
+    } catch (e) {
+      return res.status(500).json({
+        status: false,
+        message: 'Scraper error',
+        error: e.message
+      });
+    }
   });
 }
