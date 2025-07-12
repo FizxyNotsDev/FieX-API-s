@@ -119,13 +119,13 @@
           }
         },
         {
-          "name": "WhatsApp Group Finder",
-          "desc": "Cari grup WhatsApp berdasarkan kata kunci dari groupda1.link",
-          "path": "/search/whatsapp?q=belajar,programming",
-          "status": "ready",
+          "name": "WhatsApp Group Search",
+          "desc": "Cari grup WhatsApp berdasarkan kata kunci",
           "category": "search",
+          "path": "/search/whatsapp?q=termux",
+          "status": "ready",
           "params": {
-            "q": "Kata kunci pencarian, bisa lebih dari satu. Pisahkan dengan koma, contoh: belajar,coding,sekolah"    
+            "q": "Keyword grup WhatsApp, bisa lebih dari satu dipisah koma"   
           }
         }
       ]
