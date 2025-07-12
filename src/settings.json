@@ -120,12 +120,12 @@
         },
         {
           "name": "WhatsApp Group Search",
-          "desc": "Cari grup WhatsApp berdasarkan kata kunci",
-          "category": "search",
-          "path": "/search/whatsapp?q=termux",
+          "desc": "Cari grup WhatsApp berdasarkan keyword",
+          "path": "/search/whatsapp?q=",
           "status": "ready",
+          "category": "search",
           "params": {
-            "q": "Keyword grup WhatsApp, bisa lebih dari satu dipisah koma"   
+            "q": "Keyword atau beberapa keyword dipisah koma"       
           }
         }
       ]
