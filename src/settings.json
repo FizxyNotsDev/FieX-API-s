@@ -117,6 +117,16 @@
           "params": {
             "q": "Judul atau kata kunci video YouTube"
           }
+        },
+        {
+          "name": "WhatsApp Group Finder",
+          "desc": "Cari grup WhatsApp berdasarkan kata kunci dari groupda1.link",
+          "path": "/search/whatsapp?q=belajar,programming",
+          "status": "ready",
+          "category": "search",
+          "params": {
+            "q": "Kata kunci pencarian, bisa lebih dari satu. Pisahkan dengan koma, contoh: belajar,coding,sekolah"    
+          }
         }
       ]
     },
