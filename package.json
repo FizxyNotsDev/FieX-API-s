@@ -20,7 +20,8 @@
     "eventsource": "latest",
     "tough-cookie": "latest",
     "axios-cookiejar-support": "latest",
-    "node-fetch": "latest"
+    "node-fetch": "latest",
+    "cheerio": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
