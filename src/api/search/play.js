@@ -1,89 +1,83 @@
 import axios from 'axios';
-import fetch from 'node-fetch';
-
-const yt = {
-  headers: {
-    accept: '*/*',
-    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
-  },
-
-  mintaJson: async (desc, url, headers, method = 'get', body) => {
-    const res = await axios({ method, url, headers, data: body });
-    return res.data;
-  },
-
-  search: async (query) => {
-    const headers = {
-      ...yt.headers,
-      origin: 'https://v2.www-y2mate.com',
-      referer: 'https://v2.www-y2mate.com/'
-    };
-    return await yt.mintaJson('search', `https://wwd.mp3juice.blog/search.php?q=${encodeURIComponent(query)}`, headers);
-  },
-
-  getKey: async () => {
-    const headers = {
-      'content-type': 'application/json',
-      origin: 'https://iframe.y2meta-uk.com',
-      referer: 'https://iframe.y2meta-uk.com/',
-      ...yt.headers
-    };
-    return await yt.mintaJson('get key', `https://api.mp3youtube.cc/v2/sanity/key`, headers);
-  },
-
-  handleFormat: (link, formatId) => {
-    const isMp3 = formatId.includes('kbps');
-    const bitrate = formatId.replace(/[^\d]/g, '');
-    return {
-      link,
-      format: isMp3 ? 'mp3' : 'mp4',
-      audioBitrate: isMp3 ? bitrate : 128,
-      videoQuality: !isMp3 ? bitrate : 720,
-      filenameStyle: 'pretty',
-      vCodec: 'h264'
-    };
-  },
-
-  convert: async (youtubeUrl, formatId) => {
-    const { key } = await yt.getKey();
-    const payload = yt.handleFormat(youtubeUrl, formatId);
-    const headers = {
-      'content-type': 'application/x-www-form-urlencoded',
-      Key: key,
-      origin: 'https://iframe.y2meta-uk.com',
-      referer: 'https://iframe.y2meta-uk.com/',
-      ...yt.headers
-    };
-    const body = new URLSearchParams(payload).toString();
-    return await yt.mintaJson('convert', `https://api.mp3youtube.cc/v2/converter`, headers, 'post', body);
-  },
-
-  searchAndDownload: async (query, formatId = '128kbps') => {
-    const result = await yt.search(query);
-    if (!result?.items?.length) throw new Error('Tidak ditemukan hasil YouTube');
-    const youtubeUrl = `https://youtu.be/${result.items[0].id}`;
-    return await yt.convert(youtubeUrl, formatId);
-  }
-};
 
 export default function (app) {
   app.get('/search/play', async (req, res) => {
-    const { q, type = '128kbps' } = req.query;
-    if (!q) return res.status(400).json({ status: false, message: 'Parameter q wajib diisi' });
+    const query = req.query.q;
+    const format = req.query.type || '128kbps';
+
+    if (!query) {
+      return res.status(400).json({
+        status: false,
+        message: 'Parameter "q" (query) dibutuhkan.'
+      });
+    }
 
     try {
-      const result = await yt.searchAndDownload(q, type);
-      if (!result?.url) return res.status(500).json({ status: false, message: 'Gagal dapat URL download.' });
+      // 1. Search video
+      const searchRes = await axios.get(`https://wwd.mp3juice.blog/search.php?q=${encodeURIComponent(query)}`, {
+        headers: {
+          'accept': '*/*',
+          'user-agent': 'Mozilla/5.0',
+          'origin': 'https://v2.www-y2mate.com',
+          'referer': 'https://v2.www-y2mate.com/'
+        }
+      });
 
-      const buffer = await fetch(result.url).then(r => r.buffer());
-      res.setHeader('Content-Type', type.includes('kbps') ? 'audio/mpeg' : 'video/mp4');
-      res.setHeader('Content-Disposition', `attachment; filename="${result.filename}"`);
-      res.send(buffer);
-    } catch (e) {
+      const videoId = searchRes.data?.items?.[0]?.id;
+      if (!videoId) throw new Error('Video tidak ditemukan');
+
+      // 2. Get conversion key
+      const keyRes = await axios.get('https://api.mp3youtube.cc/v2/sanity/key', {
+        headers: {
+          'content-type': 'application/json',
+          'origin': 'https://iframe.y2meta-uk.com',
+          'referer': 'https://iframe.y2meta-uk.com/',
+          'user-agent': 'Mozilla/5.0'
+        }
+      });
+
+      const key = keyRes.data.key;
+      if (!key) throw new Error('Key tidak ditemukan');
+
+      // 3. Convert & get download URL
+      const formatType = format.includes('kbps') ? 'mp3' : 'mp4';
+      const bitrate = format.replace(/[^\d]/g, '') || '128';
+
+      const body = new URLSearchParams({
+        link: `https://youtu.be/${videoId}`,
+        format: formatType,
+        audioBitrate: bitrate,
+        videoQuality: '720',
+        filenameStyle: 'pretty',
+        vCodec: 'h264'
+      }).toString();
+
+      const convertRes = await axios.post('https://api.mp3youtube.cc/v2/converter', body, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Key': key,
+          'origin': 'https://iframe.y2meta-uk.com',
+          'referer': 'https://iframe.y2meta-uk.com/',
+          'user-agent': 'Mozilla/5.0'
+        }
+      });
+
+      const { url, filename } = convertRes.data;
+
+      if (!url) throw new Error('Link unduhan tidak ditemukan');
+
+      // 4. Kirim hasil JSON
+      res.json({
+        status: true,
+        title: filename,
+        format: formatType,
+        download: url
+      });
+
+    } catch (err) {
       res.status(500).json({
         status: false,
-        message: 'Terjadi kesalahan.',
-        error: e.message
+        message: err.message
       });
     }
   });
