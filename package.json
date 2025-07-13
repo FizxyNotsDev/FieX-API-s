@@ -21,7 +21,8 @@
     "tough-cookie": "latest",
     "axios-cookiejar-support": "latest",
     "node-fetch": "latest",
-    "cheerio": "latest"
+    "cheerio": "latest",
+    "qs": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
