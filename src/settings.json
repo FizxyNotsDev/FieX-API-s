@@ -102,7 +102,17 @@
           "status": "ready",
           "params": {
             "url": "Link video YouTube, contoh: https://youtu.be/abc123",
-            "type": "Format unduhan. Contoh: 128kbps, 320kbps, 144p, 720p (default: 128kbps)"    
+            "type": "Format unduhan. Contoh: 128kbps, 320kbps, 144p, 720p (default: 128kbps)"   
+          }
+        },
+        {
+          "name": "YouTube to MP4",
+          "desc": "Unduh video dari YouTube dalam berbagai resolusi seperti 360p, 720p, 1080p.",
+          "path": "/download/ytmp4?url=https://youtu.be/z_cVHQOT0Ec&type=360p",
+          "status": "ready",
+          "params": {
+            "url": "Link video YouTube (contoh: https://youtu.be/z_cVHQOT0Ec)",
+            "type": "Resolusi video, misalnya 144p, 240p, 360p, 720p, 1080p (default: 360p)"      
           }
         }
       ]
