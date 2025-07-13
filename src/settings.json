@@ -110,12 +110,14 @@
           }
         },
         {
-          "name": "Play (YouTube Audio)",
-          "desc": "Cari dan unduh audio dari YouTube berdasarkan judul",
-          "path": "/search/play?q=",
+          "name": "YouTube Play",
+          "desc": "Cari dan ambil link download YouTube (mp3/mp4)",
+          "path": "/search/play?q=alan+walker",
+          "category": "search",
           "status": "ready",
           "params": {
-            "q": "Judul atau kata kunci video YouTube"       
+            "q": "Keyword YouTube",
+            "type": "(optional) 128kbps | 320kbps | 144p | 240p | 360p | 720p | 1080p"  
           }
         }
       ]
