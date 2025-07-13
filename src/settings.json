@@ -115,17 +115,7 @@
           "path": "/search/play?q=",
           "status": "ready",
           "params": {
-            "q": "Judul atau kata kunci video YouTube"
-          }
-        },
-        {
-          "name": "WhatsApp Group Search",
-          "desc": "Cari grup WhatsApp berdasarkan keyword",
-          "path": "/search/whatsapp?q=",
-          "status": "ready",
-          "category": "search",
-          "params": {
-            "q": "Keyword atau beberapa keyword dipisah koma"       
+            "q": "Judul atau kata kunci video YouTube"       
           }
         }
       ]
