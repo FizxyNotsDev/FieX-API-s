@@ -97,7 +97,7 @@
         },
         {
           "name": "YouTube to MP3",
-          "desc": "Unduh audio/video dari YouTube dalam berbagai format seperti MP3 atau MP4",
+          "desc": "Unduh audio dari YouTube dalam format MP3",
           "path": "/download/ytmp3?url=https://youtu.be/z_cVHQOT0Ec&type=128kbps",
           "status": "ready",
           "params": {
