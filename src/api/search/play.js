@@ -1,83 +1,105 @@
-import axios from 'axios';
+import fetch from 'node-fetch';
+
+const yt = {
+  headers: {
+    "accept": "*/*",
+    "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+  },
+
+  mintaJson: async (deskripsi, url, headers, method = "get", body) => {
+    const res = await fetch(url, { headers, method, body });
+    if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+    return res.json();
+  },
+
+  search: async (query) => {
+    const headers = {
+      ...yt.headers,
+      "origin": "https://v2.www-y2mate.com",
+      "referer": "https://v2.www-y2mate.com/"
+    };
+    return await yt.mintaJson("search", `https://wwd.mp3juice.blog/search.php?q=${encodeURIComponent(query)}`, headers);
+  },
+
+  getKey: async () => {
+    const headers = {
+      "content-type": "application/json",
+      "origin": "https://iframe.y2meta-uk.com",
+      "referer": "https://iframe.y2meta-uk.com/",
+      ...yt.headers
+    };
+    return await yt.mintaJson("get key", `https://api.mp3youtube.cc/v2/sanity/key`, headers);
+  },
+
+  handleFormat: (link, formatId) => {
+    const list = ["128kbps", "320kbps", "144p", "240p", "360p", "720p", "1080p"];
+    if (!list.includes(formatId)) throw new Error(`Format tidak valid. Gunakan: ${list.join(', ')}`);
+    const format = formatId.includes('kbps') ? 'mp3' : 'mp4';
+    const bitrate = formatId.replace(/[^\d]/g, '');
+    return {
+      link,
+      format,
+      audioBitrate: format === 'mp3' ? bitrate : 128,
+      videoQuality: format === 'mp4' ? bitrate : 720,
+      filenameStyle: "pretty",
+      vCodec: "h264"
+    };
+  },
+
+  convert: async (youtubeUrl, formatId) => {
+    const { key } = await yt.getKey();
+    const payload = yt.handleFormat(youtubeUrl, formatId);
+    const headers = {
+      "content-type": "application/x-www-form-urlencoded",
+      "Key": key,
+      "origin": "https://iframe.y2meta-uk.com",
+      "referer": "https://iframe.y2meta-uk.com/",
+      ...yt.headers
+    };
+    const body = new URLSearchParams(payload).toString();
+    const json = await yt.mintaJson("convert", `https://api.mp3youtube.cc/v2/converter`, headers, "post", body);
+    json.chosenFormat = formatId;
+    return json;
+  },
+
+  searchAndDownload: async (query, formatId = "128kbps") => {
+    const result = await yt.search(query);
+    const youtubeUrl = `https://youtu.be/${result.items?.[0]?.id}`;
+    if (!youtubeUrl) throw new Error('❌ Video tidak ditemukan');
+    return await yt.convert(youtubeUrl, formatId);
+  }
+};
 
 export default function (app) {
   app.get('/search/play', async (req, res) => {
-    const query = req.query.q;
-    const format = req.query.type || '128kbps';
-
-    if (!query) {
+    const { q, type = '128kbps' } = req.query;
+    if (!q) {
       return res.status(400).json({
         status: false,
-        message: 'Parameter "q" (query) dibutuhkan.'
+        message: 'Parameter "q" tidak ditemukan'
       });
     }
 
     try {
-      // 1. Search video
-      const searchRes = await axios.get(`https://wwd.mp3juice.blog/search.php?q=${encodeURIComponent(query)}`, {
-        headers: {
-          'accept': '*/*',
-          'user-agent': 'Mozilla/5.0',
-          'origin': 'https://v2.www-y2mate.com',
-          'referer': 'https://v2.www-y2mate.com/'
-        }
-      });
+      const result = await yt.searchAndDownload(q, type);
+      if (!result?.url) {
+        return res.status(404).json({
+          status: false,
+          message: 'Gagal mendapatkan URL download'
+        });
+      }
 
-      const videoId = searchRes.data?.items?.[0]?.id;
-      if (!videoId) throw new Error('Video tidak ditemukan');
-
-      // 2. Get conversion key
-      const keyRes = await axios.get('https://api.mp3youtube.cc/v2/sanity/key', {
-        headers: {
-          'content-type': 'application/json',
-          'origin': 'https://iframe.y2meta-uk.com',
-          'referer': 'https://iframe.y2meta-uk.com/',
-          'user-agent': 'Mozilla/5.0'
-        }
-      });
-
-      const key = keyRes.data.key;
-      if (!key) throw new Error('Key tidak ditemukan');
-
-      // 3. Convert & get download URL
-      const formatType = format.includes('kbps') ? 'mp3' : 'mp4';
-      const bitrate = format.replace(/[^\d]/g, '') || '128';
-
-      const body = new URLSearchParams({
-        link: `https://youtu.be/${videoId}`,
-        format: formatType,
-        audioBitrate: bitrate,
-        videoQuality: '720',
-        filenameStyle: 'pretty',
-        vCodec: 'h264'
-      }).toString();
-
-      const convertRes = await axios.post('https://api.mp3youtube.cc/v2/converter', body, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Key': key,
-          'origin': 'https://iframe.y2meta-uk.com',
-          'referer': 'https://iframe.y2meta-uk.com/',
-          'user-agent': 'Mozilla/5.0'
-        }
-      });
-
-      const { url, filename } = convertRes.data;
-
-      if (!url) throw new Error('Link unduhan tidak ditemukan');
-
-      // 4. Kirim hasil JSON
       res.json({
         status: true,
-        title: filename,
-        format: formatType,
-        download: url
+        creator: 'fiex',
+        format: result.chosenFormat,
+        filename: result.filename,
+        url: result.url
       });
-
-    } catch (err) {
+    } catch (e) {
       res.status(500).json({
         status: false,
-        message: err.message
+        message: e.message
       });
     }
   });
