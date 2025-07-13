@@ -111,7 +111,7 @@
         },
         {
           "name": "YouTube Play",
-          "desc": "Cari dan ambil link download YouTube (audio)",
+          "desc": "Cari dan unduh audio dari YouTube (mp3)",
           "path": "/search/play?q=alan+walker",
           "category": "search",
           "status": "ready",
