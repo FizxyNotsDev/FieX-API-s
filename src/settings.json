@@ -94,6 +94,16 @@
           "params": {
             "url": "The media URL to download"
           }
+        },
+        {
+          "name": "YouTube to MP3",
+          "desc": "Unduh audio/video dari YouTube dalam berbagai format seperti MP3 atau MP4",
+          "path": "/download/ytmp3?url=https://youtu.be/z_cVHQOT0Ec&type=128kbps",
+          "status": "ready",
+          "params": {
+            "url": "Link video YouTube, contoh: https://youtu.be/abc123",
+            "type": "Format unduhan. Contoh: 128kbps, 320kbps, 144p, 720p (default: 128kbps)"    
+          }
         }
       ]
     },
