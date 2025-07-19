@@ -213,7 +213,6 @@
           "category": "info",
           "status": "ready",
           "params": {}    
-          }
         },
         {
           "name": "Cek Kuota XL",
@@ -222,6 +221,7 @@
           "status": "ready",
           "params": {
             "nomor": "Nomor XL yang ingin dicek, contoh: 087812345678"
+          }
         }
       ]
     },
