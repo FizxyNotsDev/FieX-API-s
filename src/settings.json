@@ -213,18 +213,15 @@
           "category": "info",
           "status": "ready",
           "params": {}    
+          }
         },
         {
           "name": "Cek Kuota XL",
-          "desc": "Cek sisa kuota XL melalui nomor HP. Limit: 1x / 30 menit.",
+          "desc": "Cek sisa kuota XL melalui nomor HP. Dibatasi 1x per 30 menit per nomor.",
           "path": "/info/cek-kuota-xl?nomor=",
           "status": "ready",
           "params": {
-            "nomor": {
-            "default": "087701725776",
-            "description": "Nomor XL yang ingin dicek"   
-            }
-          }
+            "nomor": "Nomor XL yang ingin dicek, contoh: 087812345678"
         }
       ]
     },
