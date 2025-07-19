@@ -223,7 +223,9 @@
           "params": {
             "nomor": {
             "default": "087701725776",
-            "description": "Nomor XL yang ingin dicek"       
+            "description": "Nomor XL yang ingin dicek"   
+            }
+          }
         }
       ]
     },
