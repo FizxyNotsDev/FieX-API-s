@@ -67,7 +67,7 @@ export default function(app) {
       cache.set(nomor, now);
       res.json({
         status: true,
-        creator: 'Anomaki Team',
+        creator: 'FieX Team',
         result
       });
     } catch (err) {
