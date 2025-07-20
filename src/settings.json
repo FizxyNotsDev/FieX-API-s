@@ -67,7 +67,16 @@
            "prompt": "Deskripsi teks untuk diubah menjadi gambar",
            "style": "Gaya gambar, contoh: photorealistic, cinematic, portrait, hyperreal",
            "resolution": "Ukuran gambar, contoh: 512x512, 1920x1080",
-           "seed": "(optional) Angka acak jika ingin konsisten hasil"    
+           "seed": "(optional) Angka acak jika ingin konsisten hasil"   
+          }
+        },
+        {
+         "name": "Text to Image",
+         "desc": "Buat gambar dari teks menggunakan scraping dari texttoimage.org",
+         "path": "/ai/txttoimage?prompt=",
+         "status": "ready",
+         "params": {
+           "prompt": "Teks deskriptif untuk menghasilkan gambar (contoh: 'a cat riding a bicycle at sunset')"          
           }
         }
       ]
