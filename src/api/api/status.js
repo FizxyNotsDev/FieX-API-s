@@ -2,16 +2,16 @@ import fs from 'fs';
 import path from 'path';
 
 const startTime = Date.now();
-let totalRequest = 0; // middleware akan menambah ini
+let totalRequest = 0;
 
 export default function(app) {
-  // === Middleware untuk hitung total request masuk ===
+  // Middleware counter request
   app.use((req, res, next) => {
     totalRequest++;
     next();
   });
 
-  // === Route: /api/status ===
+  // Route: /api/status
   app.get('/api/status', async (req, res) => {
     try {
       const filePath = path.resolve('src/setting.json');
@@ -26,8 +26,6 @@ export default function(app) {
             totalfitur += kategori.items.length;
           }
         }
-      } else if (Array.isArray(settingData.items)) {
-        totalfitur = settingData.items.length;
       }
 
       // Hitung runtime
@@ -50,6 +48,7 @@ export default function(app) {
       });
 
     } catch (err) {
+      console.error('[STATUS API ERROR]', err);
       res.status(500).json({
         status: false,
         message: "Gagal mengambil data status"
