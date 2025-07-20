@@ -74,7 +74,7 @@
          "name": "Text to Image",
          "desc": "Buat gambar dari teks menggunakan scraping dari texttoimage.org",
          "path": "/ai/txttoimage?prompt=",
-         "status": "ready",
+         "status": "error",
          "params": {
            "prompt": "Teks deskriptif untuk menghasilkan gambar (contoh: 'a cat riding a bicycle at sunset')"          
           }
