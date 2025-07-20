@@ -248,18 +248,6 @@
           }
         }
       ]
-    },
-    {
-    "name": "API Info",
-    "items": [
-      {
-        "name": "Status API",
-        "desc": "Menampilkan status API secara realtime: jumlah request, total fitur, runtime, dan domain aktif.",
-        "path": "/api/status",
-        "status": "ready",
-        "params": {}         
-        }
-      ]
     }
   ]
 }
