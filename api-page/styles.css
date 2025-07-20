@@ -48,20 +48,20 @@
 }
 
 .dark-mode {
-  --primary-color: #8b0000;
-  --primary-hover: #a9a9a9;
-  --secondary-color: #8b0000;
-  --accent-color: #8b0000;
-  --background-color: #000000;
-  --card-background: #121212;
-  --text-color: #ffffff;
-  --text-muted: #cccccc;
-  --border-color: rgba(255, 255, 255, 0.08);
-  --highlight-color: rgba(139, 0, 0, 0.3);
-  --shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  --hover-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --background-color-rgb: 0, 0, 0;
+  --primary-color: #13c0ff;
+  --primary-hover: #6f38fd;
+  --secondary-color: #6f38fd;
+  --accent-color: #fc2eb4;
+  --background-color: #07080f;
+  --card-background: #181929;
+  --text-color: #f5f6fa;
+  --text-muted: #7f8c8d;
+  --border-color: rgba(19, 192, 255, 0.12);
+  --highlight-color: rgba(19, 192, 255, 0.16);
+  --shadow: 0 10px 25px rgba(19, 192, 255, 0.09);
+  --hover-shadow: 0 15px 35px rgba(111, 56, 253, 0.15);
+  --card-shadow: 0 4px 12px rgba(19, 192, 255, 0.13);
+  --background-color-rgb: 7, 8, 15;
 }
 
 * {
