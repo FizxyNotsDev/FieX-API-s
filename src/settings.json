@@ -157,6 +157,15 @@
             "q": "Keyword YouTube",
             "type": "(optional) 128kbps | 320kbps | 144p | 240p | 360p | 720p | 1080p"  
           }
+        },
+        {
+          "name": "Mediafire Search",
+          "desc": "Search and get Mediafire direct download links (max 5 randomized results).",
+          "path": "/search/mediafire?q=",
+          "status": "ready",
+          "params": {
+            "q": "Keyword to search mediafire content (e.g., naruto, game ppsspp, windows 11, dll)"            
+          }
         }
       ]
     },
