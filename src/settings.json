@@ -123,6 +123,15 @@
             "url": "Link video YouTube (contoh: https://youtu.be/z_cVHQOT0Ec)",
             "type": "Resolusi video, misalnya 144p, 240p, 360p, 720p, 1080p (default: 360p)"      
           }
+        },
+        {
+          "name": "TikTok Downloader",
+          "desc": "Unduh video atau audio dari TikTok tanpa watermark (via tikdownloader.io)",
+          "path": "/download/tiktok?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL video TikTok (contoh: https://vt.tiktok.com/ZSSLvxh4L/)"            
+          }
         }
       ]
     },
