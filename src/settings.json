@@ -126,11 +126,11 @@
         },
         {
           "name": "TikTok Downloader",
-          "desc": "Unduh video atau audio dari TikTok tanpa watermark (via tikdownloader.io)",
+          "desc": "Unduh video/audio TikTok tanpa watermark",
           "path": "/download/tiktok?url=",
           "status": "ready",
           "params": {
-            "url": "URL video TikTok (contoh: https://vt.tiktok.com/ZSSLvxh4L/)"            
+            "url": "URL video TikTok"            
           }
         }
       ]
