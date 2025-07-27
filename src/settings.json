@@ -32,7 +32,7 @@
           "name": "DeepSeek-GiniGen",
           "desc": "Tanya jawab dengan model DeepSeek (bisa pakai websearch)",
           "path": "/ai/deepseek?text=&websearch=",
-          "status": "ready",
+          "status": "error",
           "params": {
             "text": "Pertanyaan yang ingin diajukan",
             "websearch": "(optional) true atau false (default: false)"
@@ -74,7 +74,7 @@
          "name": "Text to Image",
          "desc": "Buat gambar dari teks menggunakan scraping dari texttoimage.org",
          "path": "/ai/txttoimage?prompt=",
-         "status": "error",
+         "status": "ready",
          "params": {
            "prompt": "Teks deskriptif untuk menghasilkan gambar (contoh: 'a cat riding a bicycle at sunset')"          
           }
