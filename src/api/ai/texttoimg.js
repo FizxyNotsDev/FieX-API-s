@@ -1,5 +1,5 @@
 import axios from 'axios';
-import cheerio from 'cheerio';
+import * as cheerio from "cheerio"; // ⬅️ ESM style for latest Cheerio
 
 /*
  • Fitur By Anomaki Team
