@@ -12,7 +12,9 @@ function shuffle(arr) {
 async function mfsearch(query) {
   if (!query) throw new Error('Query is required')
 
-  const { data: html } = await axios.get(`https://mediafiretrend.com/?q=${encodeURIComponent(query)}&search=Search`)
+  const { data: html } = await axios.get(
+    `https://mediafiretrend.com/?q=${encodeURIComponent(query)}&search=Search`
+  )
   const $ = cheerio.load(html)
 
   const links = shuffle(
@@ -22,14 +24,12 @@ async function mfsearch(query) {
   ).slice(0, 5)
 
   const result = await Promise.all(
-    links.map(async link => {
+    links.map(async (link) => {
       const { data } = await axios.get(`https://mediafiretrend.com${link}`)
       const $ = cheerio.load(data)
 
       const raw = $('div.info tbody tr:nth-child(4) td:nth-child(2) script').text()
       const match = raw.match(/unescape\(['"`]([^'"`]+)['"`]\)/)
-      if (!match) throw new Error('Download URL not found')
-
       const decoded = cheerio.load(decodeURIComponent(match[1]))
 
       return {
@@ -45,20 +45,17 @@ async function mfsearch(query) {
   return result
 }
 
+// ROUTER EXPORT UNTUK EXPRESS
 export default function (app) {
   app.get('/search/mediafire', async (req, res) => {
-    const { q } = req.query
-    if (!q) return res.status(400).json({ status: false, message: 'Missing query ?q=' })
-
     try {
-      const results = await mfsearch(q)
-      res.json({
-        status: true,
-        creator: 'FieX API',
-        results
-      })
+      const q = req.query.q
+      if (!q) return res.status(400).json({ error: 'Missing query parameter ?q=' })
+
+      const result = await mfsearch(q)
+      res.json(result)
     } catch (err) {
-      res.status(500).json({ status: false, message: err.message })
+      res.status(500).json({ error: err.message || 'Internal Server Error' })
     }
   })
 }
