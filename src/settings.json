@@ -76,7 +76,16 @@
          "path": "/ai/txttoimage?prompt=",
          "status": "ready",
          "params": {
-           "prompt": "Teks deskriptif untuk menghasilkan gambar (contoh: 'a cat riding a bicycle at sunset')"          
+           "prompt": "Teks deskriptif untuk menghasilkan gambar (contoh: 'a cat riding a bicycle at sunset')"  
+          }
+        },
+        {
+          "name": "FluxAI",
+          "desc": "Generate images from text using FluxAI (HuggingFace Gradio)",
+          "path": "/ai/fluxai?prompt=",
+          "status": "ready",
+          "params": {
+            "prompt": "Text prompt for generating an image (e.g. 'robotic bird flying over a city')"          
           }
         }
       ]
