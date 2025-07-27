@@ -130,7 +130,16 @@
           "path": "/download/tiktok?url=",
           "status": "ready",
           "params": {
-            "url": "URL video TikTok"            
+            "url": "URL video TikTok"     
+          }
+        },
+        {
+          "name": "Mediafire Downloader",
+          "desc": "Unduh info dan link file dari Mediafire tanpa ribet",
+          "path": "/download/mediafire?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL file Mediafire yang valid, contoh: https://www.mediafire.com/file/xfk1u8yl4uqbizx/nulis.zip/file"            
           }
         }
       ]
