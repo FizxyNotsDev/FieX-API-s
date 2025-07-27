@@ -148,7 +148,16 @@
           "path": "/download/mediafire?url=",
           "status": "ready",
           "params": {
-            "url": "URL file Mediafire yang valid, contoh: https://www.mediafire.com/file/xfk1u8yl4uqbizx/nulis.zip/file"            
+            "url": "URL file Mediafire yang valid, contoh: https://www.mediafire.com/file/xfk1u8yl4uqbizx/nulis.zip/file"   
+          }
+        },
+        {
+          "name": "Threads Downloader",
+          "desc": "Download post Threads (image/video) lengkap dengan caption dan profil",
+          "path": "/download/thread?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL post Threads (contoh: https://www.threads.net/@infopop.id/post/DMk2wrVzIoP)"            
           }
         }
       ]
