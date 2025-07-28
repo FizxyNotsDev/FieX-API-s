@@ -29,13 +29,12 @@
           }
         },
         {
-          "name": "DeepSeek-GiniGen",
-          "desc": "Tanya jawab dengan model DeepSeek (bisa pakai websearch)",
-          "path": "/ai/deepseek?text=&websearch=",
-          "status": "error",
+          "name": "Qwen AI",
+          "desc": "AI Assistant dari Qwen-72B HuggingFace",
+          "path": "/ai/qwenai?text=",
+          "status": "ready",
           "params": {
-            "text": "Pertanyaan yang ingin diajukan",
-            "websearch": "(optional) true atau false (default: false)"
+            "text": "Teks yang ingin ditanyakan ke Qwen"
           }
         },
         {
