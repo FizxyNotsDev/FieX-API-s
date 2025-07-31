@@ -244,6 +244,15 @@
           "params": {
             "url": "Website URL to capture"   
           }
+        },
+        {
+          "name": "4K Image Upscaler",
+          "desc": "Upscale your images to 4K resolution",
+          "path": "/tools/hd4k?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL of the image to upscale"
+          }
         }
       ]
     },
