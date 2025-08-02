@@ -156,7 +156,16 @@
           "path": "/download/thread?url=",
           "status": "ready",
           "params": {
-            "url": "URL post Threads (contoh: https://www.threads.net/@infopop.id/post/DMk2wrVzIoP)"            
+            "url": "URL post Threads (contoh: https://www.threads.net/@infopop.id/post/DMk2wrVzIoP)"  
+          }
+        },
+        {            
+          "name": "TikTok Downloader V2",
+          "desc": "Download video TikTok tanpa watermark, deteksi otomatis gambar/video/audio.",
+          "path": "/download/tiktok2?url=",
+          "status": "ready",
+          "params": {
+            "url": "URL video TikTok yang valid. Contoh: https://vt.tiktok.com/xxxxx/"
           }
         }
       ]
