@@ -22,7 +22,8 @@
     "axios-cookiejar-support": "latest",
     "node-fetch": "latest",
     "cheerio": "latest",
-    "qs": "latest"
+    "qs": "latest",
+    "moment-timezone": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
