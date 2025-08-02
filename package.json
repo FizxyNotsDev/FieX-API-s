@@ -23,7 +23,8 @@
     "node-fetch": "latest",
     "cheerio": "latest",
     "qs": "latest",
-    "moment-timezone": "latest"
+    "moment-timezone": "latest",
+    "form-data": "latest"
   },
   "engines": {
     "node": ">=18.0.0"
